@@ -11,6 +11,7 @@ include "db.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservar horário</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -40,7 +41,7 @@ include "db.php";
                     },
                     success: function(resposta){
                         alert("Reserva concluida!");
-                        window.location.href("index.php");
+                        window.location.href = ("index.php");
                     }
                 })
             })

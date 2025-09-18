@@ -15,7 +15,7 @@
         } else {
             echo "Erro: " . $conn->error;
         }
-    };
+    }
 
     $conn->close();
 ?>
