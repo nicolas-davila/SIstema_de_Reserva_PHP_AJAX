@@ -17,7 +17,7 @@ include "db.php";
     <h2>Rservar horário</h2>
     <form id="reserva-campo">
         <label for="data">Data: </label>
-        <input type="date" name="data" id="data" required><br><br>
+        <input type="date" name="data_agendada" id="data_agendada" required><br><br>
         <label for="horario">Horário: </label>
         <input type="time" name="horario" id="horario" required><br><br>
         <label for="representante">Nome do Representante: </label>
@@ -34,7 +34,7 @@ include "db.php";
                     url: "./backend/gerar_reserva.php",
                     method: "POST",
                     data: {
-                        data: $("#data").val(),
+                        data_agendada: $("#data_agendada").val(),
                         horario: $("#horario").val(),
                         representante: $("#representante").val(),
                     },
