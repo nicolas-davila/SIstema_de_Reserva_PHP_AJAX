@@ -31,7 +31,17 @@ include "db.php";
                 e.preventDefault();
 
                 $.ajax({
-                    url: "./backend/gerar_reserva.php"
+                    url: "./backend/gerar_reserva.php",
+                    method: "POST",
+                    data: {
+                        data: $("#data").val(),
+                        horario: $("#horario").val(),
+                        representante: $("#representante").val(),
+                    },
+                    success: function(resposta){
+                        alert("Reserva concluida!");
+                        window.location.href("index.php");
+                    }
                 })
             })
         });
