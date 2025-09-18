@@ -32,7 +32,7 @@ include "db.php";
 
                 $.ajax({
                     url: "./backend/gerar_reserva.php",
-                    method: "POST",
+                    type: "POST",
                     data: {
                         data_agendada: $("#data_agendada").val(),
                         horario: $("#horario").val(),
