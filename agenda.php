@@ -6,31 +6,53 @@
 
     $result = $conn->query($sql);
 
-    // if($result->num_rows>0) {
-        echo "<table border='1' cellpadding='5'>";
 
-        echo "<tr>";
-        echo "<th>Segunda</th>";
-        echo "<th>Terça</th>";
-        echo "<th>Quarta</th>";
-        echo "<th>Quinta</th>";
-        echo "<th>Sexta</th>";
-        echo "<th>Sábado</th>";
-        echo "<th>Domingo</th>";
-        echo "</tr>";
+    $diaSemana = [ // Aqui atribui o valor que se encontra quando traz o n° da semana e converte em string
+        1 => "Segunda-Feira",
+        2 => "Terça-Feira",
+        3 => "Quarta-Feira",
+        4 => "Quinta-Feira",
+        5 => "Sexta-Feira",
+        6 => "Sábado",
+        7 => "Domingo"
+    ];
 
-        while($row = $result->fetch_assoc()){
-            echo "<tr>";
-            echo "<td>" . $row['id'] . "</td>";
-            echo "<td>" . $row['nome'] . "</td>";
-            echo "<td> 
-                    <button class='excluirUsuario' onclick='' data-id='" . $row['id'] . "'>Excluir</button>
-                 </td>";
-            echo "</tr>";
+    $listaSemana = [
+        1 => [],
+        2 => [],
+        3 => [],
+        4 => [],
+        5 => [],
+        6 => [],
+        7 => []
+    ];
+
+
+    while ($row = $result->fetch_assoc()) {
+        $diaNumero = date("N", strtotime($row['data_agendada']));
+        $listaSemana[$diaNumero][] = $row['id'] . " | " . $row['data_agendada'] . 
+        " | " . $row['representante'];
+    }
+
+    echo "<table border='1' cellpadding='5'>";
+    echo "<tr>";
+    foreach ($diaSemana as $diaNome) {
+        echo "<th>$diaNome</th>";
+    }
+    echo "</tr>";
+
+    echo "<tr>";
+    foreach ($listaSemana as $agendamentos) {
+        echo "<td>";
+        if (!empty($agendamentos)) {
+            foreach ($agendamentos as $agendamento) {
+                echo $agendamento . "<br>";
+            }
+        } else {
+            echo "Sem agendamentos";
         }
-        echo "</table>";
-    // } else {
-    //     echo "Nenhum horário marcado.";
-    // }
-
+        echo "</td>";
+    }
+    echo "</tr>";
+    echo "</table>";
 ?>
