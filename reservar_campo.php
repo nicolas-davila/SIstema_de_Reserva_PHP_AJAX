@@ -40,8 +40,7 @@ include "db.php";
                         representante: $("#representante").val(),
                     },
                     success: function(resposta){
-                        alert("Reserva concluida!");
-                        window.location.href = ("index.php");
+                        alert(resposta);
                     }
                 })
             })

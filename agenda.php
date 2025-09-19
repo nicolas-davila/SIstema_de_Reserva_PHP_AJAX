@@ -30,8 +30,14 @@
 
     while ($row = $result->fetch_assoc()) {
         $diaNumero = date("N", strtotime($row['data_agendada']));
-        $listaSemana[$diaNumero][] = $row['id'] . " | " . $row['data_agendada'] . 
-        " | " . $row['representante'];
+        $listaSemana[$diaNumero][] = "id: " . $row['id'] . " | " . $row['data_agendada'] . 
+        " | " . $row['representante'] . " <br><br> " . 
+        "<button class='editarReserva' onclick='editarReserva(this)' data-id='" . $row['id'] . "'>
+            Editar Reserva
+        </button>" . 
+        " <button class='excluir' onclick='' data-id='" . $row['id'] . "'>
+            Excluir Reserva
+        </button>";
     }
 
     echo "<table border='1' cellpadding='5'>";
@@ -46,7 +52,7 @@
         echo "<td>";
         if (!empty($agendamentos)) {
             foreach ($agendamentos as $agendamento) {
-                echo $agendamento . "<br>";
+                echo $agendamento . "<br><br>";
             }
         } else {
             echo "Sem agendamentos";
