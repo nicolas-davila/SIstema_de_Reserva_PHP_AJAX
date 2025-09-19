@@ -37,7 +37,7 @@ include "db.php";
                     data: {
                         data_agendada: $("#data_agendada").val(),
                         horario: $("#horario").val(),
-                        representante: $("#representante").val(),
+                        representante: $("#representante").val()
                     },
                     success: function(resposta){
                         alert(resposta);

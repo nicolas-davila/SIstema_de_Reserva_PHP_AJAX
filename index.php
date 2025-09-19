@@ -1,6 +1,6 @@
 <?php
 
-    include "db.php";
+include "db.php";
 
 ?>
 
@@ -11,7 +11,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Testing AJAX for the first time!</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+        crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+        integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+        crossorigin="anonymous"></script>
 
 </head>
 
@@ -22,10 +31,11 @@
     <a href="agenda.php">Ver agenda</a>
 
     <div id="agenda-front"></div>
+    <div id="atualizaReserva"></div>
 
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             carregarAgenda();
         });
 
@@ -33,11 +43,43 @@
             $.ajax({
                 url: "agenda.php",
                 method: "GET",
-                success: function (dados) {
+                success: function(dados) {
                     $("#agenda-front").html(dados)
                 }
             })
         };
+
+        function editarReserva(botao) {
+            let id = $(botao).data('id');
+            $.ajax({
+                url: "editarReserva.php",
+                type: "GET",
+                data: {
+                    id: id
+                },
+                success: function(resposta) {
+                    $("#atualizaReserva").html(resposta)
+                }
+            })
+        }
+
+        function atualizaReserva() {
+            let id = $("input[name='id']").val();
+
+            $.ajax({
+                url: "../backend/atualizaReserva.php",
+                type: "POST",
+                data: {
+                    id: id,
+                    data_agendada: $("#data_agendada").val(),
+                    horario: $("#horario").val()
+                },
+                success: function(resposta) {
+                    alert(resposta);
+                    carregarAgenda();
+                }
+            })
+        }
     </script>
 
 </body>
