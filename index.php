@@ -32,6 +32,7 @@ include "db.php";
 
     <div id="agenda-front"></div>
     <div id="atualizaReserva"></div>
+    <div id="defineStatus"></div>
 
 
     <script>
@@ -72,8 +73,7 @@ include "db.php";
                 data: {
                     id: $("input[name='id']").val(),
                     data_agendada: $("#data_agendada").val(),
-                    horario: $("#horario").val(),
-                    status: $("#status").val()
+                    horario: $("#horario").val()
                 },
                 success: function(resposta) {
                     alert(resposta);
@@ -83,6 +83,37 @@ include "db.php";
             });
         });
 
+        function definirStatus(botao) {
+            let id = $(botao).data('id');
+            $.ajax({
+                url: "definir_status.php",
+                type: "GET",
+                data: {
+                    id: id
+                },
+                success: function(resposta) {
+                    $("#defineStatus").html(resposta)
+                }
+            })
+        };
+
+        $(document).on('submit', '#formDefineStatus', function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: "backend/define_status.php",
+                type: "POST",
+                data: {
+                    id: $("input[name='id']").val(),
+                    status: $("#status").val()
+                },
+                success: function(resposta) {
+                    alert(resposta);
+                    carregarAgenda();
+                    $("#atualizaReserva").html("");
+                },
+            });
+        });
 
         $(document).on('click', '.excluir', function() {
             let id = $(this).data('id');

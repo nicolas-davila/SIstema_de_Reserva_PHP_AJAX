@@ -55,7 +55,7 @@
                 " | Status: " . $row['status'] . "<br><br>" .
                 "<button class='editarReserva' onclick='editarReserva(this)' data-id='" . $row['reserva_id'] . "'>Editar Reserva</button>" .
                 "<button class='excluir' data-id='" . $row['reserva_id'] . "'>Excluir Reserva</button>" .
-                "<button class='definirStatus' data-id='" . $row['reserva_id'] . "'>Definir Status</button>";
+                "<button class='definirStatus' onclick='definirStatus(this)' data-id='" . $row['reserva_id'] . "'>Definir Status</button>";
         }
     }
 

@@ -5,7 +5,6 @@
     $id = $_POST['id'];
     $data_agendada = $_POST['data_agendada'];
     $horario = $_POST['horario'];
-    $status = $_POST['status'];
 
     // var_dump($_POST);
 
@@ -14,7 +13,6 @@
         $id = $conn->real_escape_string($_POST['id']);
         $data_agendada = $conn->real_escape_string($_POST['data_agendada']);
         $horario = $conn->real_escape_string($_POST['horario']);
-        $status = $conn->real_escape_string($_POST['status']);
 
 
 
@@ -25,7 +23,7 @@
         if ($result->num_rows > 0) {
             echo "Horário reservado. Escolha outro.";
         } else {
-            $sql = "UPDATE reservas SET data_agendada='$data_agendada', horario='$horario', status='$status' WHERE id=$id";
+            $sql = "UPDATE reservas SET data_agendada='$data_agendada', horario='$horario' WHERE id=$id";
             if ($conn->query($sql) === TRUE) {
                 echo "Reserva atualizada com sucesso!";
             } else {

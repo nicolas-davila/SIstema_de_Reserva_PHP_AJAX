@@ -5,7 +5,7 @@ include "db.php";
 $id = $_GET['id'];
 
 if (!empty($id)) {
-    $sql = "SELECT * FROM reservas WHERE id = '$id'";
+    $sql = "SELECT * FROM reservas WHERE id='$id'";
     $result = $conn->query($sql);
     $reserva = mysqli_fetch_assoc($result);
 }
@@ -33,12 +33,6 @@ if (!empty($id)) {
                 <h4>Selecione o horário para alterar</h4>
                 <label for="horario">Horário: </label>
                 <input type="time" name="horario" id="horario" required><br><br>
-                <label for="status">Definir status: </label>
-                <select name="status" id="status" required>
-                    <option>Pendente</option>
-                    <option>Concluido</option>
-                    <option>Cancelado</option>
-                </select><br><br>
                 <button type="submit" id="atualizaReserva">Atualizar Reserva</button>
             </div>
         </div>
