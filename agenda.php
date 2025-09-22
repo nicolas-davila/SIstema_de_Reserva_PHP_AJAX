@@ -44,12 +44,15 @@
     while ($row = $result->fetch_assoc()) {
         $diaNumero = date("N", strtotime($row['data_agendada']));
         $listaSemana[$diaNumero][] = "id: " . $row['id'] . " | " . $row['data_agendada'] . 
-        " | " . $row['representante'] . " | " . $row['horario'] . " <br><br> " . 
+        " | " . $row['representante'] . " | " . $row['horario'] . " | " . $row['status'] . " <br><br> " . 
         "<button class='editarReserva' onclick='editarReserva(this)' data-id='" . $row['id'] . "'>
             Editar Reserva
         </button>" . 
         " <button class='excluir' onclick='' data-id='" . $row['id'] . "'>
             Excluir Reserva
+        </button>" .
+        " <button class='definirStatus' onclick='' data-id='" . $row['id'] . "'>
+            Definir Status
         </button>";
     }
 

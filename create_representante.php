@@ -1,3 +1,10 @@
+<?php
+
+    include "db.php";
+
+    $result = mysqli_query($conn, "SELECT * FROM representantes") 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,11 +20,16 @@
         <input type="text" id="cpf" name="cpf"  placeholder="Seu cpf" required>
         <button type="submit">Cadastrar</button>
     </form>
+
     <div id="resultado"></div>
+    <br>
+    <div id="listaDeRepresentantes"></div>
 </body>
 
 <script>
     $(document).ready(function() {
+        carregarRepresentantes();
+
         $("#cadastraRepresentante").on("submit", function(e) {
             e.preventDefault();
 
@@ -35,6 +47,34 @@
             })
         })
     })
+
+    function carregarRepresentantes() {
+        $.ajax({
+            url: "listar_representantes.php",
+            type: "GET",
+            success: function(dados) {
+                $("#listaDeRepresentantes").html(dados)
+            }
+        })
+    }
+
+    $(document).on('click', '.excluirRepresentante', function() {
+        let id = $(this).data('id');
+
+        if(confirm("Deseja realmente excluir esse representante?")) {
+            $.ajax({
+                url: "backend/excluir_representante.php",
+                type: "POST",
+                data: {
+                    id: id
+                },
+                success: function(resposta) {
+                    alert(resposta);
+                    carregarRepresentantes();
+                }
+            })
+        }
+    });
 </script>
 
 

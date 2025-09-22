@@ -33,6 +33,12 @@ if (!empty($id)) {
                 <h4>Selecione o horário para alterar</h4>
                 <label for="horario">Horário: </label>
                 <input type="time" name="horario" id="horario" required><br><br>
+                <label for="status">Definir status: </label>
+                <select name="status" id="status" required>
+                    <option>Pendente</option>
+                    <option>Concluido</option>
+                    <option>Cancelado</option>
+                </select><br><br>
                 <button type="submit" id="atualizaReserva">Atualizar Reserva</button>
             </div>
         </div>

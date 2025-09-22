@@ -72,7 +72,8 @@ include "db.php";
                 data: {
                     id: $("input[name='id']").val(),
                     data_agendada: $("#data_agendada").val(),
-                    horario: $("#horario").val()
+                    horario: $("#horario").val(),
+                    status: $("#status").val()
                 },
                 success: function(resposta) {
                     alert(resposta);
