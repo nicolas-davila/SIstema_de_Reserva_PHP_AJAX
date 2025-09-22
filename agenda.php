@@ -14,9 +14,9 @@
 
     $data = semanaAtual();
 
-    $sql = "SELECT * FROM reservas WHERE data_agendada >= '{$data['inicio']}' AND data_agendada <= '{$data['fim']}'";
+    // $sql = "SELECT * FROM reservas WHERE data_agendada >= '{$data['inicio']}' AND data_agendada <= '{$data['fim']}'";
 
-    $result = $conn->query($sql);   
+    // $result = $conn->query($sql);   
 
 
     $diaSemana = [ // Aqui atribui o valor que se encontra quando traz o n° da semana e converte em string
@@ -40,21 +40,26 @@
         7 => []
     ];
 
+    $sqlRepresentante = "SELECT r.nome, res.data_agendada, res.horario, res.status, res.id AS reserva_id
+    FROM representantes AS r LEFT JOIN reservas AS res ON r.id = res.representante";
 
-    while ($row = $result->fetch_assoc()) {
-        $diaNumero = date("N", strtotime($row['data_agendada']));
-        $listaSemana[$diaNumero][] = "id: " . $row['id'] . " | " . $row['data_agendada'] . 
-        " | " . $row['representante'] . " | " . $row['horario'] . " | " . $row['status'] . " <br><br> " . 
-        "<button class='editarReserva' onclick='editarReserva(this)' data-id='" . $row['id'] . "'>
-            Editar Reserva
-        </button>" . 
-        " <button class='excluir' onclick='' data-id='" . $row['id'] . "'>
-            Excluir Reserva
-        </button>" .
-        " <button class='definirStatus' onclick='' data-id='" . $row['id'] . "'>
-            Definir Status
-        </button>";
+    $resultRepresentante = $conn->query($sqlRepresentante);
+
+    while ($row = $resultRepresentante->fetch_assoc()) {
+        if ($row['data_agendada']) { // só adiciona se tiver reserva
+            $diaNumero = date("N", strtotime($row['data_agendada']));
+            $listaSemana[$diaNumero][] =
+                "Representante: " . $row['nome'] .
+                " | Data: " . $row['data_agendada'] . "<br>" .
+                "Horário: " . $row['horario'] .
+                " | Status: " . $row['status'] . "<br><br>" .
+                "<button class='editarReserva' onclick='editarReserva(this)' data-id='" . $row['reserva_id'] . "'>Editar Reserva</button>" .
+                "<button class='excluir' data-id='" . $row['reserva_id'] . "'>Excluir Reserva</button>" .
+                "<button class='definirStatus' data-id='" . $row['reserva_id'] . "'>Definir Status</button>";
+        }
     }
+
+
 
 
     echo "<table border='1' cellpadding='5'>";

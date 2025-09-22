@@ -22,7 +22,16 @@ include "db.php";
         <label for="horario">Horário: </label>
         <input type="time" name="horario" id="horario" required><br><br>
         <label for="representante">Nome do Representante: </label>
-        <input type="text" name="representante" id="representante" required>
+        <select name="representante" id="representante">
+            <?php
+            
+                $representantes = mysqli_query($conn, "SELECT * FROM representantes");
+                while($representante = mysqli_fetch_assoc($representantes)) {
+                    echo "<option value='{$representante['id']}'> {$representante['nome']} </option>";
+                }
+            
+            ?>
+        </select>
         <button type="submit">Reservar</button>
     </form>
 
