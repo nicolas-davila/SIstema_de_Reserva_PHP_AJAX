@@ -63,6 +63,24 @@ include "db.php";
             })
         }
 
+        $(document).on('click', '.excluir', function() {
+            let id = $(this).data('id');
+
+            if (confirm("Deseja realmente excluir essa reserva?")) {
+                $.ajax({
+                    url: "backend/excluir_reserva.php",
+                    type: "POST",
+                    data: {
+                        id: id
+                    },
+                    success: function(resposta) {
+                        alert(resposta);
+                        carregarAgenda();
+                    }
+                })
+            }
+        });
+
         function atualizaReserva() {
             let id = $("input[name='id']").val();
 
