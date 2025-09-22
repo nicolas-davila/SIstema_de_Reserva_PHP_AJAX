@@ -63,6 +63,26 @@ include "db.php";
             })
         }
 
+        $(document).on('submit', '#formEditar', function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: "backend/atualizaReserva.php",
+                type: "POST",
+                data: {
+                    id: $("input[name='id']").val(),
+                    data_agendada: $("#data_agendada").val(),
+                    horario: $("#horario").val()
+                },
+                success: function(resposta) {
+                    alert(resposta);
+                    carregarAgenda();
+                    $("#atualizaReserva").html("");
+                },
+            });
+        });
+
+
         $(document).on('click', '.excluir', function() {
             let id = $(this).data('id');
 
@@ -80,24 +100,6 @@ include "db.php";
                 })
             }
         });
-
-        function atualizaReserva() {
-            let id = $("input[name='id']").val();
-
-            $.ajax({
-                url: "../backend/atualizaReserva.php",
-                type: "POST",
-                data: {
-                    id: id,
-                    data_agendada: $("#data_agendada").val(),
-                    horario: $("#horario").val()
-                },
-                success: function(resposta) {
-                    alert(resposta);
-                    carregarAgenda();
-                }
-            })
-        }
     </script>
 
 </body>

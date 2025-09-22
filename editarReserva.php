@@ -33,7 +33,7 @@ if (!empty($id)) {
                 <h4>Selecione o horário para alterar</h4>
                 <label for="horario">Horário: </label>
                 <input type="time" name="horario" id="horario" required><br><br>
-                <button type="submit" onclick="atualizaReserva()">Atualizar Reserva</button>
+                <button type="submit" id="atualizaReserva">Atualizar Reserva</button>
             </div>
         </div>
     </div>
