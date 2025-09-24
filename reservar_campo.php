@@ -20,7 +20,17 @@ include "db.php";
         <label for="data">Data: </label>
         <input type="date" name="data_agendada" id="data_agendada" required><br><br>
         <label for="horario">Horário: </label>
-        <input type="time" name="horario" id="horario" required><br><br>
+        <select name="horario" id="horario">
+            <option>08:00</option>
+            <option>09:30</option>
+            <option>11:00</option>
+            <option>14:30</option>
+            <option>16:00</option>
+            <option>17:30</option>
+            <option>19:00</option>
+            <option>20:30</option>
+        </select>
+        <br><br>
         <label for="representante">Nome do Representante: </label>
         <select name="representante" id="representante">
             <?php
