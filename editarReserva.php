@@ -12,7 +12,7 @@ if (!empty($id)) {
 
 ?>
 
-<h3 style="text-align: center;">Editar Reserva</h3><br><br> 
+<h3 style="text-align: center;">Editar Reserva</h3><br><br>
 
 <form id="formEditar">
 
@@ -32,7 +32,17 @@ if (!empty($id)) {
                 <input type="date" name="data_agendada" id="data_agendada" required><br><br>
                 <h4>Selecione o horário para alterar</h4>
                 <label for="horario">Horário: </label>
-                <input type="time" name="horario" id="horario" required><br><br>
+                <select name="horario" id="horario">
+                    <option>08:00</option>
+                    <option>09:30</option>
+                    <option>11:00</option>
+                    <option>14:30</option>
+                    <option>16:00</option>
+                    <option>17:30</option>
+                    <option>19:00</option>
+                    <option>20:30</option>
+                </select>
+                <br><br>
                 <button type="submit" id="atualizaReserva">Atualizar Reserva</button>
             </div>
         </div>
